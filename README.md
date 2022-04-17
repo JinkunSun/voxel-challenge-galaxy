@@ -13,7 +13,7 @@ to install the dependendies of the voxel renderer.
 Please fill in your code in `main.py` and include your result in this README.md file.
 
 ## Demo
-![Galaxy](./galaxy.png)
+![Galaxy](./galaxy.jpg)
 
 ## Quickstart
 
