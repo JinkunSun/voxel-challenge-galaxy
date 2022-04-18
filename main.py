@@ -14,16 +14,14 @@ def create_cube(length:int):
             scene.set_voxel(vec3((1-2*x)*i,length,(1-2*z)*k),2,vec3(1,1,1))
 @ti.func
 def create_cricle(radius:int, centre_x,centre_y,centre_z:int,r,g,b:float):
-    for i,j,k in ti.ndrange(radius,radius,radius):
+    for i,j,k in ti.ndrange((-radius,radius),(-radius,radius),(-radius,radius)):
         if i*i+j*j+k*k <= radius*radius:
-            for x,y,z in ti.ndrange(2,2,2):
-                        scene.set_voxel(vec3((1-2*x)*i+centre_x,(1-2*y)*j+centre_y,(1-2*z)*k+centre_z),1,vec3(r,g,b))                  
+            scene.set_voxel(vec3(i+centre_x,j+centre_y,k+centre_z),1,vec3(r,g,b))                  
 @ti.func
 def create_ring(radius_max,radius_min:int, centre_x,centre_z:int,r=1.0,g=1.0,b=1.0):
-    for i,j in ti.ndrange(radius_max,radius_max):
+    for i,j in ti.ndrange((-radius_max,radius_max),(-radius_max,radius_max)):
         if i*i+j*j <= radius_max*radius_max and i*i+j*j >=radius_min*radius_min:
-            for x,y in ti.ndrange(2,2):
-                scene.set_voxel(vec3((1-2*x)*i+centre_x,0,(1-2*y)*j+centre_z),1,vec3(r,g,b))
+            scene.set_voxel(vec3(i+centre_x,0,j+centre_z),1,vec3(r,g,b))
 @ti.kernel
 def initialize_voxels():
     create_cube(63)
